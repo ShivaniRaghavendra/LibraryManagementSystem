@@ -22,13 +22,13 @@ A modern and user-friendly web application for managing library books, users, an
 
 ## ⚡ Getting Started
 
-### 1️⃣ **Clone this repository**
+### 1️⃣ Clone this repository
 ```bash
 git clone https://github.com/ShivaniRaghavendra/LibraryManagementSystem.git
 cd LibraryManagementSystem
 ```
 
-### 2️⃣ **Install dependencies**
+### 2️⃣ Install dependencies
 - **Backend:**
     ```bash
     cd library-backend
@@ -40,18 +40,18 @@ cd LibraryManagementSystem
     npm install
     ```
 
-### 3️⃣ **Configure Firebase Backend**
+### 3️⃣ Configure Firebase Backend
 **This app does NOT include any Firebase secret or key 🔐. For security, you must supply your own!**
 
 1. Go to [Firebase Console](https://console.firebase.google.com/) 🔗 → your project → Gear ⚙️ → "Project settings"
-2. Scroll to "Service accounts" and click **Generate new private key** 🔑 (downloads a `.json` file)
-3. Rename if needed, and place this file at:
+2. Click the **"Service accounts"** tab and then **Generate new private key** 🔑 (this will download a `.json` file)
+3. **Rename the file if you like** (optional), but make sure to place it exactly at:
    ```
    library-backend/serviceAccountKey.json
    ```
    *(This path is already in `.gitignore` and never pushed to GitHub!)*
 
-### 4️⃣ **Start the servers**
+### 4️⃣ Start the servers
 - **Backend:**
     ```bash
     cd library-backend
