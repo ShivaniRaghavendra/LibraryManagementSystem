@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const admin = require('firebase-admin');
+const { addDays } = require('date-fns');
+
 
 const app = express();
 
@@ -274,13 +276,17 @@ app.post('/api/transactions/borrow', async (req, res) => {
     if (bookData.availableCopies <= 0) return res.status(400).json({ error: 'No copies available' });
     if (userData.status !== 'active') return res.status(400).json({ error: 'User account is not active' });
 
+    // USE FIRESTORE TIMESTAMP FOR BOTH DATES!
+    const NOW = admin.firestore.Timestamp.now();
+    const FIFTEEN_DAYS = 15 * 24 * 60 * 60; // 15 days in seconds
+
     const transactionData = {
       userId,
       bookId,
       userName: userData.name,
       bookTitle: bookData.title,
-      borrowDate: admin.firestore.FieldValue.serverTimestamp(),
-      dueDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000), // 14 days
+      borrowDate: NOW,
+      dueDate: new admin.firestore.Timestamp(NOW.seconds + FIFTEEN_DAYS, NOW.nanoseconds),
       status: 'borrowed',
     };
 
@@ -296,6 +302,7 @@ app.post('/api/transactions/borrow', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 // Return book
 app.post('/api/transactions/return/:transactionId', async (req, res) => {
